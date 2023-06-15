@@ -72,3 +72,17 @@ Webpack 对于代码分割和静态资源导入有着“先天优势”，并且
 - 配置 rollup.config.js
 - 新增文件 src/index.ts
 - 配置打包脚本 "build-rollup": "rimraf es && rollup -c",
+- 注意 rollup.config.mjs 的配置，有关使用 esm 导入，配置相应插件，后缀为 mjs, 以及 package.json 中 "module"，"types"等配置
+
+#### 12.发布组件库到网站
+
+- 安装 chromatic yarn add --dev chromatic
+- 发布 Storybook 注意：确保 your-project-token 用您自己的项目令牌替换。
+  - npx chromatic --project-token=<your-project-token>
+
+#### 发布项目
+
+项目发布成功后，如果有问题，可以通过 yarn link 进行调试，确认没问题后再发布版本。
+link 的本质就是软链接，这样可以让我们快速使用本地正在开发的其它包。
+假设组件库仓库为项目 A，使用组件库的仓库为项目 B。
+在项目 A 下运行 yarn link，在项目 B 下运行 yarn link A，就可以实时调试项目 A 了
