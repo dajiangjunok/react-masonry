@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+#### 1.使用技术栈 react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### 2.组件库工具使用：dumi 和 storybook
 
-## Available Scripts
+#### 3.npx create-react-app r-ui --template typescript
 
-In the project directory, you can run:
+#### 4.为 react 项目提供 storybook 能力
 
-### `npm start`
+- npx storybook init
+- yarn storybook 就可以本地启动 Storybook
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 5.安装 Prettier 是一个代码格式化工具
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- yarn add prettier -D
+- 配置.prettierrc
+- 修改 package.json 脚本 "prettier": "prettier src --write",
 
-### `npm test`
+#### 6.配置 ESlint
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ESLint 用于检测 JS 代码，发现代码质量问题并修复问题，还可以自己根据项目需要进行规则的自定义配置以及检查范围等等。
 
-### `npm run build`
+- yarn add eslint eslint-plugin-react eslint-plugin-simple-import-sort eslint-plugin-unused-imports @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+- 配置 .eslintrc.js
+- package.json 增加脚本 "eslint": "eslint src --fix",
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 7.配置 lint-staged
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+lint-staged 相当于一个文件过滤器，每次提交时只检查本次提交的暂存区的文件，它不能格式化代码和校验文件，需要自己配置一下，如：.eslintrc、.stylelintrc 等，然后在 package.json 中引入。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- yarn add lint-staged -D
+- 配置 .lintstagedrc
+- 配置脚本 "ling-staged": "ling-staged",
 
-### `npm run eject`
+#### 8.配置 husky
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+husky 工具可以定义拦截 git 钩子，对提交的文件和信息做校验和自动修复。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- yarn add husky -D
+- 配置脚本 "prepare": "husky install",
+- 执行 yarn prepare
+- 会生成 .husky 文件，在内部配置文件 pre-commit 文件
+- 在 git commit 之前，将会自动执行上面 pre-commit 脚本配置的命令。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### 9.配置 commitlint
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+commitlint 是一个 git commit 信息校验工具。
 
-## Learn More
+- yarn add commitlint @commitlint/config-conventional -D
+- 配置 .commitlintrc.js
+- 在.husky 文件内部配置文件 commit-msg 文件
+- git commit-msg 钩子函数触发时，将会自动执行 commit-msg 脚本配置的命令，校验 commit msg 是否符合规范
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 10.开发公共组件
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- src 下建公共组件文件
+
+  - [component-name].tsx
+  - [component-name].scss
+  - index.ts
+  - [component-name].stories.mdx
+
+- 举例瀑布流插件
+
+#### 11.组件库打包
+
+比较热门的打包工具有 Webpack、rollup。
+Webpack 对于代码分割和静态资源导入有着“先天优势”，并且支持热模块替换(HMR)，而 Rollup 并不支持，所以当项目需要用到以上，则可以考虑选择 Webpack。但是，Rollup 对于代码的 Tree-shaking 和 ES6 模块有着算法优势上的支持，若你项目只需要打包出一个简单的 bundle 包，并是基于 ES6 模块开发的，可以考虑使用 Rollup。
+因此组件库打包工具选择 rollup。
+
+- npm i rollup -g 全局安装 rollup 打包工具
+- yarn add @rollup/plugin-commonjs @rollup/plugin-node-resolve @rollup/plugin-strip @rollup/plugin-typescript rollup-plugin-postcss rollup-plugin-node-externals autoprefixer -D
+- 配置 rollup.config.js
+- 新增文件 src/index.ts
+- 配置打包脚本 "build-rollup": "rimraf es && rollup -c",

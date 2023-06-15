@@ -10,6 +10,8 @@
     "@types/node": "^16.18.36",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
+    "classnames": "^2.3.2",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -19,13 +21,21 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-rollup": "rimraf es && rollup -c",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "prettier": "prettier src --write",
+    "eslint": "eslint src --fix",
+    "ling-staged": "ling-staged",
+    "prepare": "husky install",
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:storybook/recommended"
     ]
   },
   "browserslist": {
@@ -39,5 +49,40 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^17.6.5",
+    "@rollup/plugin-commonjs": "^25.0.1",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-strip": "^3.0.2",
+    "@rollup/plugin-typescript": "^11.1.1",
+    "@storybook/addon-essentials": "^7.0.21",
+    "@storybook/addon-interactions": "^7.0.21",
+    "@storybook/addon-links": "^7.0.21",
+    "@storybook/blocks": "^7.0.21",
+    "@storybook/preset-create-react-app": "^7.0.21",
+    "@storybook/react": "^7.0.21",
+    "@storybook/react-webpack5": "^7.0.21",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/lodash-es": "^4.17.7",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "autoprefixer": "^10.4.14",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "commitlint": "^17.6.5",
+    "eslint": "^8.42.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-storybook": "^0.6.12",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
+    "prop-types": "^15.8.1",
+    "rollup-plugin-node-externals": "^6.1.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.63.4",
+    "storybook": "^7.0.21",
+    "webpack": "^5.87.0"
   }
 }
