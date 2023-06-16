@@ -1,12 +1,12 @@
 {
-  "name": "r-ui",
-  "version": "0.1.0",
-  "private": true,
+  "name": "r-ui-dajiangjunok",
+  "version": "0.1.1",
+  "private": false,
   "license": "MIT",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "es"
+    "dist"
   ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
